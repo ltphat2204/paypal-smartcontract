@@ -1,15 +1,7 @@
-const hre = require("hardhat");
+const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 
-async function main() {
-    const Paypal = await hre.ethers.getContractFactory("Paypal");
-    const paypal = await Paypal.deploy();
-
-    await paypal.deployed();
-
-    console.log("Paypal deployed to: ", paypal.address);
-}
-
-main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-})
+module.exports = buildModule("Paypal", (m) => {
+    const paypal = m.contract("Paypal");
+  
+    return { paypal };
+});

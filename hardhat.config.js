@@ -8,7 +8,7 @@ module.exports = {
   solidity: "0.8.24",
   networks: {
     polygon_amoy: {
-      url: process.env.POLYGON_NUMBAI,
+      url: process.env.POLYGON_RPC,
       accounts: [process.env.PRIVATE_KEY],
     }
   },
