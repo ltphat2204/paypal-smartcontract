@@ -18,12 +18,12 @@ describe("Get name", function () {
     });
 
     it("Should return the name of user", async function () {
-        const alexanderAccount = "0x6c938de5AD7Fb563A96a8a949CfdD3E82d48CE95";
         const alexanderAccountName = "Alexander";
-
+        const [ alexanderAccount ] = await hre.ethers.getSigners();
+        
         const { paypal } = await loadFixture(deployPaypal);
         // Can not set name to the specified account
-        paypal.addName(alexanderAccountName, {from: alexanderAccount})
+        await paypal.connect(alexanderAccount).addName(alexanderAccountName);
 
         expect(await paypal.getName(alexanderAccount)).to.equal(alexanderAccountName);
     })
