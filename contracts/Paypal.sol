@@ -89,26 +89,14 @@ contract Paypal {
 		history[receiver].push(newReceive);
 	}
 
-	function getMyRequests(address _user) public view returns (
-		address[] memory,
-		uint256[] memory,
-		string[] memory,
-		string[] memory
-	) {
-		address[] memory addrs = new address[](requests[_user].length);
-		uint256[] memory amt = new uint256[](requests[_user].length);
-		string[] memory msge = new string[](requests[_user].length);
-		string[] memory nme = new string[](requests[_user].length);
+	function getMyRequests(address _user) public view returns (Request[] memory) {
+		Request[] memory result = new Request[](requests[_user].length);
 
 		for (uint256 i = 0; i < requests[_user].length; i++) {
-			Request storage myRequests = requests[_user][i];
-			addrs[i] = myRequests.requestor;
-			amt[i] = myRequests.amount;
-			msge[i] = myRequests.message;
-			nme[i] = myRequests.name;
+			result[i] = requests[_user][i];
 		}
 
-		return (addrs, amt, msge, nme);
+		return result;
 	}
 
 	function getMyHistory(address _user) public view returns (SendReceive[] memory) {

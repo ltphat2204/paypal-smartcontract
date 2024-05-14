@@ -22,7 +22,6 @@ describe("Get name", function () {
         const [ alexanderAccount ] = await hre.ethers.getSigners();
         
         const { paypal } = await loadFixture(deployPaypal);
-        // Can not set name to the specified account
         await paypal.connect(alexanderAccount).addName(alexanderAccountName);
 
         expect(await paypal.getName(alexanderAccount)).to.equal(alexanderAccountName);
