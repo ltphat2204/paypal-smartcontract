@@ -61,7 +61,7 @@ contract Paypal {
 		Request[] storage myRequests = requests[msg.sender];
 		Request storage payableRequest = myRequests[_request];
 
-		uint256 toPay = payableRequest.amount * 10**18;
+		uint256 toPay = payableRequest.amount * 10**6;
 		require(msg.value == toPay, "Incorrect amount");
 
 		payable(payableRequest.requestor).transfer(msg.value);
